@@ -22,6 +22,9 @@ export default defineComponent({
             <div class="column">
                 <Cronometro :tempoEmSegundos='tarefa.duracaoEmSegundos'/>
             </div>
+            <div class="column">
+               {{ tarefa.projeto.nome }}
+            </div>
         </div>
 
     </Box>
