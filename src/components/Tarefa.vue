@@ -23,7 +23,7 @@ export default defineComponent({
                 <Cronometro :tempoEmSegundos='tarefa.duracaoEmSegundos'/>
             </div>
             <div class="column">
-               {{ tarefa.projeto.nome }}
+               {{ tarefa.projeto?.nome || 'N/B' }}
             </div>
         </div>
 

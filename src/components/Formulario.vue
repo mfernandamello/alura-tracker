@@ -3,6 +3,8 @@ import { computed, defineComponent } from 'vue'
 import Temporizador from './Temporizador.vue';
 import { key } from '@/store/index';
 import { useStore } from 'vuex';
+import { NOTIFICAR } from '@/store/mutacoes';
+import { TipoNotificacao } from '@/interfaces/INotificacao';
 
 
 export default defineComponent({
@@ -16,10 +18,20 @@ export default defineComponent({
     },
     methods: {
         finalizarTarefa(tempoEmSegundos: number) {
+            const projeto = this.projetos.find(proj => proj.id === this.idProjeto)
+            if(!projeto){
+                this.store.commit(NOTIFICAR, {
+                    titulo: 'Tarefa não cadastrada',
+                    texto: 'Selecione um projeto para cadastrar a tarefa!',
+                    tipo: TipoNotificacao.FALHA
+                })
+                return
+            }
+
             this.$emit('aoSalvarTarefa', {
                 descricao:this.descricao,
                 duracaoEmSegundos: tempoEmSegundos,
-                projeto: this.projetos.find(proj => proj.id === this.idProjeto)
+                projeto: projeto
             })
             this.descricao = ''
         }
@@ -28,7 +40,8 @@ export default defineComponent({
     setup () {
         const store = useStore(key)
         return{
-            projetos: computed(() => store.state.projetos)
+            projetos: computed(() => store.state.projetos),
+            store
         }
     }
 })  
