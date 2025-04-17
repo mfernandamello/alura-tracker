@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BarraLateral from "./components/BarraLateral.vue";
+import Notificaoes from './components/Notificaoes.vue';
 
 export default defineComponent({
   name: 'App',
@@ -10,7 +11,7 @@ export default defineComponent({
   },
   methods: {
   },
-  components: {BarraLateral},
+  components: {BarraLateral, Notificaoes},
 })
 </script>
 
@@ -20,6 +21,7 @@ export default defineComponent({
       <BarraLateral/>
     </div>
     <div class="column is-three-quarter">
+      <Notificaoes/>
       <RouterView></RouterView>
     </div>
   </main>

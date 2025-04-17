@@ -1,5 +1,6 @@
 <script lang="ts">
 import { useStore } from '@/store';
+import { ADICIONA_PROJETO, EDITAR_PROJETO } from '@/store/mutacoes';
 import { defineComponent } from 'vue';
 
 
@@ -23,9 +24,9 @@ export default defineComponent({
         salvar() {
 
             if(this.id){
-                this.store.commit('EDITAR_PROJETO', {id: this.id, nome: this.nomeDoProjeto})
+                this.store.commit(EDITAR_PROJETO, {id: this.id, nome: this.nomeDoProjeto})
             }else{
-                this.store.commit('ADICIONA_PROJETO', this.nomeDoProjeto)
+                this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto)
             }
             this.nomeDoProjeto = '';
             this.$router.push('/projetos')
